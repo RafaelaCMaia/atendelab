@@ -70,8 +70,7 @@ switch ($controller) {
         break;
 
     case 'pessoas':
-        exigirAutenticacao();
-
+        
         $pessoasController = new PessoasController();
 
         switch ($action) {
