@@ -1,0 +1,20 @@
+meta {
+  name: Cadastrar pessoa
+  type: http
+  seq: 6
+}
+
+post {
+  url: http://localhost/atendelab/public/?controller=pessoas&action=criar
+  body: none
+  auth: inherit
+}
+
+params:query {
+  controller: pessoas
+  action: criar
+}
+
+settings {
+  encodeUrl: true
+}
