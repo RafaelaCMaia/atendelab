@@ -6,13 +6,17 @@ meta {
 
 get {
   url: http://localhost/atendelab/public/?controller=usuarios&action=listar
-  body: none
+  body: formUrlEncoded
   auth: inherit
 }
 
 params:query {
   controller: usuarios
   action: listar
+}
+
+body:file {
+  file: @file()
 }
 
 settings {

@@ -1,0 +1,27 @@
+meta {
+  name: Cadastrar tipo de atendimento
+  type: http
+  seq: 12
+}
+
+post {
+  url: http://localhost/atendelab/public/?controller=tiposAtendimentos&action=cadastrar
+  body: formUrlEncoded
+  auth: inherit
+}
+
+params:query {
+  controller: tiposAtendimentos
+  action: cadastrar
+}
+
+body:form-urlencoded {
+  nome: Orientação de projeto
+  descricao: Orientações acadêmicas sobre projetos integradores.
+  status: ativo
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

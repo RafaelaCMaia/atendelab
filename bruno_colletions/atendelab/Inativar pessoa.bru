@@ -1,0 +1,29 @@
+meta {
+  name: Inativar pessoa
+  type: http
+  seq: 10
+}
+
+post {
+  url: http://localhost/atendelab/public/?controller=pessoas&action=inativar
+  body: formUrlEncoded
+  auth: inherit
+}
+
+params:query {
+  controller: pessoas
+  action: inativar
+}
+
+headers {
+  : 
+}
+
+body:form-urlencoded {
+  id: 1
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

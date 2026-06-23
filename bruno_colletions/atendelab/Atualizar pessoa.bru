@@ -1,26 +1,27 @@
 meta {
-  name: Cadastrar pessoa
+  name: Atualizar pessoa
   type: http
-  seq: 6
+  seq: 9
 }
 
 post {
-  url: http://localhost/atendelab/public/?controller=pessoas&action=criar
+  url: http://localhost/atendelab/public/?controller=pessoas&action=atualizar
   body: formUrlEncoded
   auth: inherit
 }
 
 params:query {
   controller: pessoas
-  action: criar
+  action: atualizar
 }
 
 body:form-urlencoded {
+  id: 2
   nome: Rafaela Maia
   documento: 212.343.121-98
   telefone: (77) 77777-7777
   curso: rafaela.teste@gmail.com
-  periodo: 5º
+  periodo: 5º periodo
   status: ativo
 }
 

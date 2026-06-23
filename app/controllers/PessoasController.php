@@ -28,10 +28,7 @@ class PessoasController
         $stmt = $this->pdo->query($sql);
         $pessoas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        echo json_encode(
-            $pessoas,
-            JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE
-        );
+        echo json_encode($pessoas, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
     }
 
     public function buscarPorId(): void
@@ -69,10 +66,7 @@ class PessoasController
             return;
         }
 
-        echo json_encode(
-            $pessoa,
-            JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE
-        );
+        echo json_encode($pessoa, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
     }
 
     public function criar(): void
@@ -84,7 +78,7 @@ class PessoasController
         $telefone = trim($_POST['telefone'] ?? '');
         $curso = trim($_POST['curso'] ?? '');
         $periodo = trim($_POST['periodo'] ?? '');
-        $status = trim($_POST['status'] ?? 'Regular');
+        $status = trim($_POST['status'] ?? 'Ativo');
 
         if (
             $nome === '' ||
@@ -146,8 +140,7 @@ class PessoasController
             http_response_code(500);
 
             echo json_encode([
-                'erro' => 'Erro ao cadastrar pessoa.',
-                'detalhes' => $e->getMessage()
+                'erro' => 'Erro ao cadastrar pessoa.'
             ]);
         }
     }
@@ -163,13 +156,11 @@ class PessoasController
         $telefone = trim($_POST['telefone'] ?? '');
         $curso = trim($_POST['curso'] ?? '');
         $periodo = trim($_POST['periodo'] ?? '');
-        $status = trim($_POST['status'] ?? 'Regular');
+        $status = trim($_POST['status'] ?? 'Ativo');
 
-        if (!$id) {
+        if (!$id || $nome === '') {
             http_response_code(400);
-            echo json_encode([
-                'erro' => 'ID inválido.'
-            ]);
+            echo json_encode(['erro' => 'ID e nome são obrigatórios.']);
             return;
         }
 
@@ -206,13 +197,12 @@ class PessoasController
             http_response_code(500);
 
             echo json_encode([
-                'erro' => 'Erro ao atualizar pessoa.',
-                'detalhes' => $e->getMessage()
+                'erro' => 'Erro ao atualizar pessoa.'
             ]);
         }
     }
 
-    public function excluir(): void
+    public function inativar(): void
     {
         header('Content-Type: application/json; charset=utf-8');
 
@@ -220,15 +210,14 @@ class PessoasController
 
         if (!$id) {
             http_response_code(400);
-            echo json_encode([
-                'erro' => 'ID inválido.'
-            ]);
+            echo json_encode(['erro' => 'ID inválido.']);
             return;
         }
 
         try {
 
-            $sql = "DELETE FROM pessoas
+            $sql = "UPDATE pessoas
+                    SET status = 'Inativo'
                     WHERE id = :id";
 
             $stmt = $this->pdo->prepare($sql);
@@ -236,7 +225,7 @@ class PessoasController
             $stmt->execute();
 
             echo json_encode([
-                'mensagem' => 'Pessoa excluída com sucesso.'
+                'mensagem' => 'Pessoa inativada com sucesso.'
             ], JSON_UNESCAPED_UNICODE);
 
         } catch (PDOException $e) {
@@ -244,8 +233,7 @@ class PessoasController
             http_response_code(500);
 
             echo json_encode([
-                'erro' => 'Erro ao excluir pessoa.',
-                'detalhes' => $e->getMessage()
+                'erro' => 'Erro ao inativar pessoa.'
             ]);
         }
     }

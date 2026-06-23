@@ -1,18 +1,19 @@
 meta {
-  name: Listar pessoas
+  name: Busca pessoa por ID
   type: http
-  seq: 7
+  seq: 8
 }
 
 get {
-  url: http://localhost/atendelab/public/?controller=pessoas&action=listar
-  body: formUrlEncoded
+  url: http://localhost/atendelab/public/?controller=pessoas&action=buscarPorId&id=2
+  body: none
   auth: inherit
 }
 
 params:query {
   controller: pessoas
-  action: listar
+  action: buscarPorId
+  id: 2
 }
 
 headers {
