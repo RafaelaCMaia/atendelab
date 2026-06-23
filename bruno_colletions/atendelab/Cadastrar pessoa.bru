@@ -6,7 +6,7 @@ meta {
 
 post {
   url: http://localhost/atendelab/public/?controller=pessoas&action=criar
-  body: none
+  body: formUrlEncoded
   auth: inherit
 }
 
@@ -15,6 +15,16 @@ params:query {
   action: criar
 }
 
+body:form-urlencoded {
+  nome: Rafaela Maia
+  documento: 212.343.121-98
+  telefone: (77) 77777-7777
+  curso: rafaela.teste@gmail.com
+  periodo: 5º
+  status: ativo
+}
+
 settings {
   encodeUrl: true
+  timeout: 0
 }

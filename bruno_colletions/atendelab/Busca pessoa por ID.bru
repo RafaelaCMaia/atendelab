@@ -1,0 +1,26 @@
+meta {
+  name: Busca pessoa por ID
+  type: http
+  seq: 8
+}
+
+get {
+  url: http://localhost/atendelab/public/?controllers=pessoa&action=buscarPorId&id=2
+  body: none
+  auth: inherit
+}
+
+params:query {
+  controllers: pessoa
+  action: buscarPorId
+  id: 2
+}
+
+headers {
+  Accept: application/json
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
