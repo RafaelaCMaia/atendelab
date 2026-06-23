@@ -1,0 +1,33 @@
+meta {
+  name: Cadastrar atendimento
+  type: http
+  seq: 16
+}
+
+post {
+  url: http://localhost/atendelab/public/?controller=atendimentos&action=criar
+  body: formUrlEncoded
+  auth: inherit
+}
+
+params:query {
+  controller: atendimentos
+  action: criar
+}
+
+body:form-urlencoded {
+  descricao: Orientação sobre atividade avaliativa.
+  data_atendimento: 2026-06-22
+  hora_atendimento: 21:15:25
+  status: aberto
+  criado_em: 2026-06-22 21:15:25
+  observacao: tudo certo
+  pessoa_id: 2
+  tipo_atendimento_id: 2
+  usuario_id: 2
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

@@ -1,0 +1,25 @@
+meta {
+  name: Inativar tipos de atendimento
+  type: http
+  seq: 14
+}
+
+post {
+  url: http://localhost/atendelab/public/?controller=tiposAtendimentos&action=inativar
+  body: formUrlEncoded
+  auth: inherit
+}
+
+params:query {
+  controller: tiposAtendimentos
+  action: inativar
+}
+
+body:form-urlencoded {
+  id: 1
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

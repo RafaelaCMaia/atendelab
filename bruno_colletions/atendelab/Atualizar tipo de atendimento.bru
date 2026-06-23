@@ -1,0 +1,28 @@
+meta {
+  name: Atualizar tipo de atendimento
+  type: http
+  seq: 13
+}
+
+post {
+  url: http://localhost/atendelab/public/?controller=tiposAtendimentos&action=atualizar
+  body: formUrlEncoded
+  auth: inherit
+}
+
+params:query {
+  controller: tiposAtendimentos
+  action: atualizar
+}
+
+body:form-urlencoded {
+  nome: Orientação de projeto
+  descricao: Dúvidas sobre disciplinas, conteúdos e atividades.
+  status: ativo
+  id: 2
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

@@ -1,0 +1,21 @@
+meta {
+  name: Listar tipos de atendimento
+  type: http
+  seq: 11
+}
+
+get {
+  url: http://localhost/atendelab/public/?controller=tiposAtendimentos&action=listar
+  body: none
+  auth: inherit
+}
+
+params:query {
+  controller: tiposAtendimentos
+  action: listar
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

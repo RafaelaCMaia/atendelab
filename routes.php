@@ -3,6 +3,8 @@
 require_once __DIR__ . '/app/Controllers/AuthController.php';
 require_once __DIR__ . '/app/Controllers/UsuariosController.php';
 require_once __DIR__ . '/app/Controllers/PessoasController.php';
+require_once __DIR__ . '/app/Controllers/TiposAtendimentosController.php';
+require_once __DIR__ . '/app/Controllers/AtendimentosController.php';
 require_once __DIR__ . '/app/Middleware/auth.php';
 
 $controller = $_GET['controller'] ?? 'auth';
@@ -91,8 +93,8 @@ switch ($controller) {
                 $pessoasController->atualizar();
                 break;
 
-            case 'excluir':
-                $pessoasController->excluir();
+            case 'inativar':
+                $pessoasController->inativar();
                 break;
 
             default:
@@ -100,6 +102,69 @@ switch ($controller) {
                 echo 'Acao de pessoas nao encontrada.';
         }
         break;
+
+        case 'tiposAtendimentos':
+
+        $tiposController = new TiposAtendimentosController();
+
+        switch ($action) {
+
+        case 'listar':
+            $tiposController->listar();
+            break;
+
+        case 'buscarPorId':
+            $tiposController->buscarPorId();
+            break;
+
+        case 'cadastrar':
+            $tiposController->cadastrar();
+            break;
+
+        case 'atualizar':
+            $tiposController->atualizar();
+            break;
+
+        case 'inativar':
+            $tiposController->inativar();
+            break;
+
+        default:
+            http_response_code(404);
+            echo 'Acao de tipos de atendimento nao encontrada.';
+    }
+    break;
+
+    case 'atendimentos':
+
+    $atendimentosController = new AtendimentosController();
+
+    switch ($action) {
+
+        case 'listar':
+            $atendimentosController->listar();
+            break;
+
+        case 'buscarPorId':
+            $atendimentosController->buscarPorId();
+            break;
+
+        case 'criar':
+            $atendimentosController->criar();
+            break;
+
+        case 'atualizar':
+            $atendimentosController->atualizar();
+            break;
+
+        case 'inativar':
+            $atendimentosController->inativar();
+            break;
+
+        default:
+            echo 'Ação de atendimentos não encontrada.';
+    }
+    break;
 
     default:
         http_response_code(404);
