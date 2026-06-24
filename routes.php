@@ -72,6 +72,7 @@ switch ($controller) {
         break;
 
     case 'pessoas':
+                exigirAutenticacao();
         
         $pessoasController = new PessoasController();
 
@@ -104,6 +105,7 @@ switch ($controller) {
         break;
 
         case 'tiposAtendimentos':
+                    exigirAutenticacao();
 
         $tiposController = new TiposAtendimentosController();
 
@@ -136,6 +138,7 @@ switch ($controller) {
     break;
 
     case 'atendimentos':
+                exigirAutenticacao();
 
     $atendimentosController = new AtendimentosController();
 
