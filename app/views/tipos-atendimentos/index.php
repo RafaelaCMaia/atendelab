@@ -165,7 +165,7 @@ function novoTipo() {
 async function carregarTipos() {
     try {
         const resposta = await AtendeLabApi.get(
-            'tipos',
+            'tiposAtendimentos',
             'listar'
         );
 
@@ -235,7 +235,7 @@ async function carregarTipos() {
 async function editarTipo(id) {
     try {
         const resposta = await AtendeLabApi.get(
-            'tipos',
+            'tiposAtendimentos',
             'buscar',
             { id }
         );
@@ -280,7 +280,7 @@ formTipo.addEventListener('submit', async event => {
 
     try {
         await AtendeLabApi.post(
-            'tipos',
+            'tiposAtendimentos',
             acao,
             new FormData(formTipo)
         );
@@ -315,7 +315,7 @@ async function inativarTipo(id) {
 
     try {
         await AtendeLabApi.post(
-            'tipos',
+            'tiposAtendimentos',
             'inativar',
             { id }
         );

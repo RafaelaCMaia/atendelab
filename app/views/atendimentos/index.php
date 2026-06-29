@@ -208,7 +208,7 @@ function labelRegistro(obj, ...keys) {
 async function carregarCombos() {
     const [pessoasResp, tiposResp] = await Promise.all([
         AtendeLabApi.get('pessoas', 'listar'),
-        AtendeLabApi.get('tipos', 'listar')
+        AtendeLabApi.get('tiposAtendimentos', 'listar')
     ]);
 
     const pessoas = AtendeLabApi

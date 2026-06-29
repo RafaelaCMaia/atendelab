@@ -120,7 +120,7 @@ switch ($controller) {
             $tiposController->buscarPorId();
             break;
 
-        case 'cadastrar':
+        case 'criar':
             $tiposController->cadastrar();
             break;
 
