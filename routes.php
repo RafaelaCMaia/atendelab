@@ -165,8 +165,13 @@ switch ($controller) {
             $atendimentosController->inativar();
             break;
 
+        case 'alterarStatus':
+            $atendimentosController->alterarStatus();
+            break;
+
         default:
             echo 'Ação de atendimentos não encontrada.';
+            
     }
     break;
 

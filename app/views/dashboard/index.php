@@ -98,10 +98,10 @@ require __DIR__ . '/../layouts/header.php';
 <script>
 document.addEventListener('DOMContentLoaded', async () => {
     const targets = {
-        pessoas: document.getElementById('totalPessoas'),
-        tipos: document.getElementById('totalTipos'),
-        atendimentos: document.getElementById('totalAtendimentos')
-    };
+    pessoas: document.getElementById('totalPessoas'),
+    tiposAtendimentos: document.getElementById('totalTipos'),
+    atendimentos: document.getElementById('totalAtendimentos')
+};
 
     for (const [controller, element] of Object.entries(targets)) {
         try {

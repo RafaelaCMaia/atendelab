@@ -136,9 +136,9 @@ require __DIR__ . '/../layouts/header.php';
                         <label class="form-label">Novo status</label>
 
                         <select class="form-select" name="status" required>
-                            <option value="aberto">Aberto</option>
-                            <option value="em_andamento">Em andamento</option>
-                            <option value="concluido">Concluído</option>
+                           <option value="ativo">Ativo</option>
+                           <option value="inativo">Em andamento</option>
+                            <option value="inativo">Inativo</option>
                         </select>
                     </div>
 

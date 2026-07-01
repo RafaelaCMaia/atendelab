@@ -7,6 +7,7 @@ class AtendimentosController
     public function __construct()
     {
         require __DIR__ . '/../../config/database.php';
+        require_once __DIR__ . '/../Middleware/auth.php';
         $this->pdo = $pdo;
     }
 
@@ -93,29 +94,31 @@ class AtendimentosController
 
         $pessoa_id = filter_input(INPUT_POST, 'pessoa_id', FILTER_VALIDATE_INT);
         $tipo_atendimento_id = filter_input(INPUT_POST, 'tipo_atendimento_id', FILTER_VALIDATE_INT);
-        $usuario_id = filter_input(INPUT_POST, 'usuario_id', FILTER_VALIDATE_INT);
+        $usuario = usuarioAtual();
+        $usuario_id = $usuario['id'] ?? null;
 
         $data_atendimento = trim($_POST['data_atendimento'] ?? '');
-        $hora_atendimento = trim($_POST['hora_atendimento'] ?? '');
+        $hora_atendimento = trim($_POST['horario_atendimento'] ?? '');      
         $descricao = trim($_POST['descricao'] ?? '');
         $observacao = trim($_POST['observacao'] ?? '');
-        $status = trim($_POST['status'] ?? 'Aberto');
+        $status = trim($_POST['status'] ?? 'ativo');
 
         if (
-            !$pessoa_id ||
-            !$tipo_atendimento_id ||
-            !$usuario_id ||
-            $data_atendimento === '' ||
-            $hora_atendimento === ''
-        ) {
-            http_response_code(400);
+        !$pessoa_id ||
+        !$tipo_atendimento_id ||
+        !$usuario_id ||
+        $data_atendimento === '' ||
+        $hora_atendimento === ''
+    ) {
 
-            echo json_encode([
-                'erro' => 'Campos obrigatórios não preenchidos.'
-            ]);
+        http_response_code(400);
 
-            return;
-        }
+    echo json_encode([
+        'erro' => 'Campos obrigatórios não preenchidos.'
+    ]);
+
+    return;
+}
 
         try {
 
@@ -271,4 +274,48 @@ class AtendimentosController
             ]);
         }
     }
+    public function alterarStatus(): void
+{
+    header('Content-Type: application/json; charset=utf-8');
+
+    $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
+    $status = trim($_POST['status'] ?? '');
+    $observacao = trim($_POST['observacao_final'] ?? '');
+
+    if (!$id || $status === '') {
+        http_response_code(400);
+        echo json_encode([
+            'erro' => 'Dados inválidos.'
+        ]);
+        return;
+    }
+
+    try {
+
+        $sql = "UPDATE atendimentos
+                   SET status = :status,
+                       observacao = :observacao
+                 WHERE id = :id";
+
+        $stmt = $this->pdo->prepare($sql);
+
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $stmt->bindValue(':status', $status);
+        $stmt->bindValue(':observacao', $observacao);
+
+        $stmt->execute();
+
+        echo json_encode([
+            'mensagem' => 'Status atualizado com sucesso.'
+        ], JSON_UNESCAPED_UNICODE);
+
+    } catch (PDOException $e) {
+
+        http_response_code(500);
+
+        echo json_encode([
+            'erro' => $e->getMessage()
+        ]);
+    }
+}
 }
